@@ -9,7 +9,7 @@ ligne 37 .env -- remplacer "no-reply@laravelstarter1.com" par -- "no-reply@appna
 ```
 
 ### Launch 
-```shell
+```shell 
 composer install
 npm install
 php artisan storage:link

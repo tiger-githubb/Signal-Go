@@ -68,7 +68,7 @@ class PagesController extends Controller
                 'user_query' => $request->get('message'),
             ), function ($message) use ($request) {
                 $message->from($request->email);
-                $message->to('contact@laravelstarter1.com', 'Admin')->subject($request->get('subject'));
+                $message->to('contact@signalgo.com', 'Admin')->subject($request->get('subject'));
             });
 
             return back()->with('success', 'Nous avons reçu votre message. Merci !');
