@@ -55,11 +55,6 @@
                 {{ session('error') }}
             </div>
             @else
-            <div class="alert alert-dark" style="display: flex;justify-content: center;">
-                <p>
-                    Pour rechercher une catégorie ou une publication <a class="" href="{{route ('blog')}}"> allez ici.</a>
-                </p>
-            </div>
             @endif
 
 
