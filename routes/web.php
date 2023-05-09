@@ -6,20 +6,30 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PagesController;
-
+use App\Http\Controllers\SignalController;
 
 Route::get('locale/{locale}', function ($locale) {
     Session::put('locale', $locale);
     return redirect()->back();
 });
 
-Route::any('/register', function () {
-    return  view('auth.pages.login');
-});
+// Route::any('/register', function () {
+//     return  view('auth.pages.login');
+// });
 
 
 
-Route::get('/', [PagesController::class, 'index'])->name('acceuil');
+Route::get('/', [SignalController  ::class, 'index'])->name('acceuil');
+
+    //Reports
+    Route::post('/', [SignalController::class, 'store'])->name('reports.store');
+
+    Route::get('/signalement/{id}/commenter', [SignalController::class, 'show_reportcomment'])->name('reportcommemt.show');
+    Route::post('/signalement/{id}/enregistrer-commentaire', [SignalController::class, 'store_reportcommemt'])->name('reportcommemt.store');
+    // Route::get('tableau-de-bord/publications/{post}/modifier', [PostController::class, 'edit'])->name('article.edit');
+    // Route::put('tableau-de-bord/publications/{post}/update', [PostController::class, 'update'])->name('article.update');
+    // Route::get('tableau-de-bord/publications/{post}/supprimer', [PostController::class, 'destroy'])->name('article.destroy');
+
 Route::get('blog', [PostController::class, 'index'])->name('blog');
 Route::get('blog/articles/{post}', [PostController::class, 'show'])->name('article.show');
 Route::get('blog/categories/{category}', [CategoryController::class, 'show'])->name('category.show');

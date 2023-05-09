@@ -30,32 +30,60 @@
 
 </div>
 
-@if ($posts->count() > 0)
-<div class="container mt-5 mb-5">
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <h4>Dernières nouvelles</h4>
-            <ul class="timeline">
-                @foreach ($posts as $post)
-                <li>
-                    <img class="img-fluid" src="{{ asset('/storage/'.$post->image) }}" alt="">
-                    <p>catégorie :
-                        <a href="{{ route('category.show', $post->category->slug)}}">{{ $post->category->name }}</a>
-                        <span class=" float-right">{{ $post->created_at->format('d M Y') }}</span>
-                    </p>
-                    <p>publié par : {{ $post->user->name }}</p>
-                    <p class="h5">Titre : {{ $post->title }}</p>
-                    <p>{!! Str::limit($post->content, 95, '...') !!} </p>
-                    <a target="" href="{{ route('article.show', $post->slug) }}">lire plus</a>
-                </li>
-                @endforeach
-            </ul>
+@section('content')
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ __('Nouveau signalement') }}</div>
+
+                    <div class="card-body">
+                        <form method="POST" action="{{ route('reports.store') }}">
+                            @csrf
+
+                            <div class="form-group row">
+                                <label for="location" class="col-md-4 col-form-label text-md-right">{{ __('Emplacement') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="location" type="text" class="form-control @error('location') is-invalid @enderror" name="location" value="{{ old('location') }}" required autocomplete="location" autofocus>
+
+                                    @error('location')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
+
+                                <div class="col-md-6">
+                                    <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" required autocomplete="description">{{ old('description') }}</textarea>
+
+                                    @error('description')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-0">
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('Enregistrer') }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-@endif
-
 @endsection
+
 
 
 @section('footer')

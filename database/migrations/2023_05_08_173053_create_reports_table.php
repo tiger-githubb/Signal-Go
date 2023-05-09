@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->string('location');
-            $table->string('comment')->nullable();
+            $table->string('description')->nullable();
             $table->enum('status', ['pending', 'in_progress', 'fixed'])->default('pending');
             $table->timestamps();
         });
