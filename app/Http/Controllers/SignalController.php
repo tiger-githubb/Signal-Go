@@ -33,6 +33,31 @@ class SignalController extends Controller
         return redirect()->route('acceuil')->with('success', 'Le signalement a été ajouté avec succès.');
     }
 
+    public function show_signalement(Request $request)
+    {
+        // Afficher la page daccueil
+        $reports = Report::with('comments')->get();
+        return view('front.pages.signal', ['reports' => $reports]);
+    }
+
+    public function store_signalement(Request $request)
+    {
+        // Valider les données du formulaire
+        $validatedData = $request->validate([
+            'location' => 'required',
+            'description' => 'required',
+        ]);
+
+        // Créer un nouveau signalement
+        $report = new Report;
+        $report->location = $validatedData['location'];
+        $report->description = $validatedData['description'];
+        $report->save();
+
+        // Rediriger l'utilisateur avec un message de confirmation
+        return redirect()->route('acceuil')->with('success', 'Le signalement a été ajouté avec succès.');
+    }
+
     public function show_reportcomment($id)
     {
         try {
