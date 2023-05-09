@@ -11,7 +11,7 @@ class SignalController extends Controller
     public function index(Request $request)
     {
         // Afficher la page daccueil
-        $reports = Report::all();
+        $reports = Report::with('comments')->get();
         return view('front.pages.index', ['reports' => $reports]);
     }
 
@@ -33,7 +33,17 @@ class SignalController extends Controller
         return redirect()->route('acceuil')->with('success', 'Le signalement a été ajouté avec succès.');
     }
 
-    public function addComment(Request $request)
+    public function show_reportcomment($id)
+    {
+        try {
+            $report = Report::findOrFail($id);
+            return view('front.pages.reportcomment', compact('report'));
+        } catch (ModelNotFoundException $e) {
+            return redirect()->back();
+        }
+    }
+
+    public function store_reportcommemt(Request $request)
     {
         // Valider les données du formulaire
         $validatedData = $request->validate([
@@ -43,22 +53,14 @@ class SignalController extends Controller
         ]);
     
         // Ajouter un nouveau commentaire
-        $comment = new ReportComment;
-        $comment->report_id = $validatedData['report_id'];
-        $comment->name = $validatedData['name'];
-        $comment->comment = $validatedData['comment'];
-        $comment->save();
+        $reportcomment = new ReportComment;
+        $reportcomment->report_id = $validatedData['report_id'];
+        $reportcomment->name = $validatedData['name'];
+        $reportcomment->comment = $validatedData['comment'];
+        $reportcomment->save();
     
         // Rediriger l'utilisateur vers la page du signalement avec un message de confirmation
-        return redirect()->route('reports.show', ['id' => $validatedData['report_id']])->with('success', 'Le commentaire a été ajouté avec succès.');
-    }
-
-    public function show_reportcomment(Request $report){
-        
-    }
-
-    public function store_reportcommemt(Request $report){
-
+        return redirect()->route('acceuil')->with('success', 'Le commentaire a été ajouté avec succès.');
     }
     
     
