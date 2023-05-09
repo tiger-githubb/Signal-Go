@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Mail;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Report;
 use App\Models\Contact;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -42,6 +43,27 @@ class PagesController extends Controller
             ->get();
 
         return view('back.pages.publications', compact('categories', 'posts'));
+    }
+
+    public function dashboard_signalisations()
+    {
+        $reports = Report::all();
+        return view('back.pages.signalisations', compact('reports'));
+    }
+
+    public function destroy(Report $report)
+    {
+
+        try {
+
+            $report = Report::where('id', $report->id)->firstOrFail();
+
+            $report->delete();
+            return redirect()->route('signalisations')->with('status', 'La signalisation a été supprimé avec succès.');
+        } catch (\Exception $e) {
+
+            return back()->with('error', 'Une erreur s\'est produite. Veuillez réessayer.');
+        }
     }
 
     // Contact and support send
