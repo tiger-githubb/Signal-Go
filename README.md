@@ -1,12 +1,5 @@
-## LaravelStarter1
-LaravelStarter1 laravel9 web template
-
-### Todo first [appname = nom de la nouvelle application]
-```shell
-ligne 71 PagesController -- remplacer contact@laravelstarter1.com par contact@appname.com
-ligne 1 .env -- changer le app name
-ligne 37 .env -- remplacer "no-reply@laravelstarter1.com" par -- "no-reply@appname.com"
-```
+## SignalGo
+Plateforme de signalisation des feu rouges au Togo
 
 ### Launch 
 ```shell 
