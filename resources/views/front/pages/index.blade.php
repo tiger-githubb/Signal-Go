@@ -8,29 +8,28 @@
 
 @section('content')
 
-<div class="">
+    <div class="">
 
-    <a href="locale/en">{{ __('global.Anglais') }}</a>
+        <a href="locale/en">{{ __('global.Anglais') }}</a>
 
-    <a href="locale/fr">{{ __('global.Français') }}</a>
+        <a href="locale/fr">{{ __('global.Français') }}</a>
 
-    <a>{{ __('front/welcome.pagename') }}</a>
+        <a>{{ __('front/welcome.pagename') }}</a>
 
-    @if (Route::has('login'))
-    @auth
-    <li class="nav-item">
-        <a class="nav-link" href="{{route('dashboard')}}">Tableau de bord</a>
-    </li>
-    @else
-    <li class="nav-item">
-        <a class="nav-link" href="{{route('login')}}">Connexion</a>
-    </li>
-    @endauth
-    @endif
+        @if (Route::has('login'))
+        @auth
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('dashboard')}}">Tableau de bord</a>
+        </li>
+        @else
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('login')}}">Connexion</a>
+        </li>
+        @endauth
+        @endif
 
-</div>
+    </div>
 
-@section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -82,6 +81,41 @@
             </div>
         </div>
     </div>
+
+    <div class="container" style="margin-top: 100px !important">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ __('Liste des signalements') }}</div>
+
+                    <div class="card-body">
+                        <ul>
+                            @foreach ($reports as $report)
+                                <li>
+                                    {{ $report->location }} - {{ $report->description }}
+
+                                    @if ($report->comments->count() > 0)
+                                    <span class="comment-count">{{ $report->comments->count() }} commentaire{{ ($report->comments->count() > 1) ? 's' : '' }}</span>
+                                    @else
+                                        <span class="comment-count">Aucun commentaire</span>
+                                    @endif
+                                    
+                                </li>
+                                <a href="{{ route('reportcomment.show', $report->id) }}">Ajouter un commentaire</a>
+                        
+                                <ul>
+                                    @foreach ($report->comments as $comment)
+                                        <li>{{ $comment->comment }} - par {{ $comment->name }}</li>
+                                    @endforeach
+                                </ul>
+                            @endforeach
+                        </ul>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 
