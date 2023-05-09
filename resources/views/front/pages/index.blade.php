@@ -7,115 +7,192 @@
 @endsection
 
 @section('content')
-
-    <div class="">
-
-        <a href="locale/en">{{ __('global.Anglais') }}</a>
-
-        <a href="locale/fr">{{ __('global.Français') }}</a>
-
-        <a>{{ __('front/welcome.pagename') }}</a>
-
-        @if (Route::has('login'))
-        @auth
-        <li class="nav-item">
-            <a class="nav-link" href="{{route('dashboard')}}">Tableau de bord</a>
-        </li>
-        @else
-        <li class="nav-item">
-            <a class="nav-link" href="{{route('login')}}">Connexion</a>
-        </li>
-        @endauth
-        @endif
-
+    <!-- ***** Preloader Start ***** -->
+    <div id="js-preloader" class="js-preloader">
+        <div class="preloader-inner">
+            <span class="dot"></span>
+            <div class="dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
     </div>
+    <!-- ***** Preloader End ***** -->
 
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Nouveau signalement') }}</div>
+    <section class="hero" id="hero">
+        <div class="heroText">
+            <h1 class="text-white mt-5 mb-lg-4" data-aos="zoom-in" data-aos-delay="800">
+                Signal'Go
+            </h1>
 
-                    <div class="card-body">
-                        <form method="POST" action="{{ route('reports.store') }}">
-                            @csrf
+            <p class="text-secondary-white-color" style="font-size: 20px;" data-aos="fade-up" data-aos-delay="1000">
+                La plateforme de signalisation des feux Tricolores defectieux au <strong
+                    class="custom-underline">Togo</strong>
+            </p>
+        </div>
 
-                            <div class="form-group row">
-                                <label for="location" class="col-md-4 col-form-label text-md-right">{{ __('Emplacement') }}</label>
+        <div class="videoWrapper">
+            <video autoplay="" loop="" muted="" class="custom-video"
+                poster="/assets/images/banner-02.jpg') }}">
+                <source src="{{ asset('/front/assets/videos/video1.mp4') }}"type="video/mp4">
 
-                                <div class="col-md-6">
-                                    <input id="location" type="text" class="form-control @error('location') is-invalid @enderror" name="location" value="{{ old('location') }}" required autocomplete="location" autofocus>
+                La video n'est pas suporter par votre navigateur
+            </video>
+        </div>
 
-                                    @error('location')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
+        <div class="overlay"></div>
+    </section>
 
-                            <div class="form-group row">
-                                <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="index.html" class="logo">
+                            <img src="{{ asset('/front/assets/images/logo.png') }}" alt="">
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li><a href="{{ route('acceuil') }}" class="active">Acceuil</a></li>
+                            <li><a href="{{ route('aPropos') }}">A Propos</a></li>
+                            <li><a href="{{ route('signalement.show') }}">Signaler</a></li>
 
-                                <div class="col-md-6">
-                                    <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" required autocomplete="description">{{ old('description') }}</textarea>
 
-                                    @error('description')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
+                            @if (Route::has('login'))
+                                @auth
+                                    <li class="nav-item">
+                                        <a class="" href="{{ route('dashboard') }}">Tableau de bord</a>
+                                    </li>
+                                @else
+                                    <li class="nav-item">
+                                        <a class="" href="{{ route('login') }}">Connexion</a>
+                                    </li>
+                                @endauth
+                            @endif
 
-                            <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Enregistrer') }}
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+    <!-- ***** Main Banner Area Start ***** -->
+    <section id="section-1">
+        <div class="content-slider">
+            <div class="slider">
+                <div id="top-banner-1" class="banner">
+                    <div class="banner-inner-wrapper header-text">
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+    <!-- ***** Main Banner Area End ***** -->
 
-    <div class="container" style="margin-top: 100px !important">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Liste des signalements') }}</div>
+    <div class="visit-country">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="section-heading">
+                        <h2>Les signalisations recentes </h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="items">
 
-                    <div class="card-body">
-                        <ul>
+                        <div class="row">
                             @foreach ($reports as $report)
-                                <li>
-                                    {{ $report->location }} - {{ $report->description }}
+                                <div class="col-lg-12">
+                                    <div class="item">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-sm-5">
+                                                <div class="image">
+                                                    <img src="{{ asset('/front/assets/images/country-01.jpg') }}"
+                                                        alt="">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8 col-sm-7">
+                                                <div class="right-content">
+                                                    <h4>{{ $report->location }} </h4>
+                                                    <span>Region maritime </span>
 
-                                    @if ($report->comments->count() > 0)
-                                    <span class="comment-count">{{ $report->comments->count() }} commentaire{{ ($report->comments->count() > 1) ? 's' : '' }}</span>
-                                    @else
-                                        <span class="comment-count">Aucun commentaire</span>
-                                    @endif
-                                    
-                                </li>
-                                <a href="{{ route('reportcomment.show', $report->id) }}">Ajouter un commentaire</a>
-                        
-                                <ul>
-                                    @foreach ($report->comments as $comment)
-                                        <li>{{ $comment->comment }} - par {{ $comment->name }}</li>
-                                    @endforeach
-                                </ul>
+                                                    <p>{{ $report->description }}</p>
+                                                    <ul class="info">
+                                                        <li>
+                                                            @if ($report->comments->count() > 0)
+                                                                <span
+                                                                    class="comment-count"><i class="fa fa-user"></i> {{ $report->comments->count() }}
+                                                                    commentaire{{ $report->comments->count() > 1 ? 's' : '' }}</span>
+                                                            @else
+                                                                <span class="comment-count"> <i class="fa fa-user"></i>Aucun commentaire</span>
+                                                            @endif
+                                                        </li>
+                                                        <li><i class="fa fa-globe"></i> Longitude</li>
+                                                        <li><i class="fa fa-globe"></i> Latitude </li>
+                                                    </ul>
+                                                    <ul>
+                                                        @foreach ($report->comments as $comment)
+                                                            <li style="display: contents !important;">{{ $comment->comment }} - par <b>{{ $comment->name }}</b></li>
+                                                        @endforeach
+                                                    </ul>
+
+                                                </div>
+                                                <div class="main-button">
+                                                    <a href="{{ route('reportcomment.show', $report->id) }}">Ajouter un
+                                                        commentaire</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             @endforeach
-                        </ul>                        
+
+
+
+                            <div class="col-lg-12">
+                                <ul class="page-numbers">
+                                    <li><a href="#"><i class="fa fa-arrow-left"></i></a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li class="active"><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#"><i class="fa fa-arrow-right"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="side-bar-map">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div id="map">
+                                    {{-- <iframe
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126931.66525378477!2d1.1642883422946664!3d6.182315355755898!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1023e1c113185419%3A0x3224b5422caf411d!2zTG9tw6k!5e0!3m2!1sfr!2stg!4v1683653797511!5m2!1sfr!2stg"
+                                        width="100%" height="550px" frameborder="0"
+                                        style="border:0; border-radius: 23px; " allowfullscreen scrolling="yes"></iframe> --}}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 @endsection
 
 
