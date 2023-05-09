@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('report_id');
             $table->foreign('report_id')->references('id')->on('reports')->onDelete('cascade');
+            $table->string('name');
             $table->text('comment');
             $table->timestamps();
         });
