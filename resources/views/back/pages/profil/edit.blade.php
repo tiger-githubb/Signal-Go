@@ -46,12 +46,9 @@
                         </div>
                         @endif
 
-                        <h3 class="card-title">Changer d'image de profil</h3>
+                        <h3 class="card-title">Image de profil</h3>
                         <div class="row align-items-center">
-                            <div class="col-auto"><span class="avatar avatar-xl" style="background-image: url(https://placehold.jp/3d4070/ffffff/128x128.png)"></span>
-                            </div>
-                            <div class="col-auto">
-                                <input type="file" id="avatar" class="form-control">
+                            <div class="col-auto"><span class="avatar avatar-xl" style="background-image: url({{ asset('back/dist/img/tiger.jpg') }})"></span>
                             </div>
                         </div>
                         <h3 class="card-title mt-4">Détails du compte</h3>
