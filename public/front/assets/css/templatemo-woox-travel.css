@@ -40,6 +40,10 @@ figure, header, nav, section, article, aside, footer, figcaption {
   outline: 0;
 }
 
+body{
+background-color: white !important;
+}
+
 .clearfix:after {
   content: ".";
   display: block;
@@ -711,7 +715,7 @@ Banner Style
 
 #section-1 {
   margin-top: 0px;
-  height: 50vh;
+  height: 10vh;
   min-height: 10px !important;
   color: #fff;
   background-color: #ffffff;
@@ -2394,4 +2398,13 @@ textarea{
 
 b{
   color: black !important;
+}
+
+.comment-border{
+  border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.comment-name{
+  padding-left: 20px !important;
 }

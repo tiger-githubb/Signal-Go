@@ -7,7 +7,7 @@
         </div>
         <div class="col-lg-4">
           <div class="border-button">
-            <a href="reservation.html">Signaler un probleme</a>
+            <a href="{{ route('signalement.show') }}">Signaler un probleme</a>
           </div>
         </div>
       </div>
@@ -19,8 +19,7 @@
       <div class="row">
         <div class="col-lg-12">
           <p>Copyright © 2023 <a href="#">Signal'Go</a> Company. All rights reserved.
-            <br>Design and code by : <a href="" target="_blank" title="free CSS templates">Aristide Tiger</a>
-
+            <br>Design and code by : <a href="" target="_blank" title="free CSS templates">Aristide Tiger</a> 
           </p>
         </div>
       </div>
