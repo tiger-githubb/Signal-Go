@@ -75,7 +75,7 @@
 
             </p>
             <div class="main-button">
-              <a href="reservation.html">Faire une signalisation</a>
+              <a href="{{ route('signalement.show') }}">Faire une signalisation</a>
             </div>
           </div>
         </div>
@@ -89,7 +89,7 @@
       <div class="row">
         <div class="col-lg-6 align-self-center">
           <div class="left-image">
-            <img src="assets/images/about-left-image.jpg" alt="">
+            <img src="{{ asset('/front/assets/images/about-left-image.jpg') }}" alt="">
           </div>
         </div>
         <div class="col-lg-6">
@@ -124,7 +124,7 @@
           </div>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
           <div class="main-button">
-            <a href="reservation.html">Faire une sinalisation</a>
+            <a href="{{ route('signalement.show') }}">Faire une siGnalisation</a>
           </div>
         </div>
       </div>

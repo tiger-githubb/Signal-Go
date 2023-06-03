@@ -1,6 +1,7 @@
 @extends ('front.layout')
 
 @section('style')
+
 @endsection
 
 @section('header')
@@ -34,7 +35,7 @@
 
         <div class="videoWrapper">
             <video autoplay="" loop="" muted="" class="custom-video"
-                poster="/assets/images/banner-02.jpg') }}">
+                poster="">
                 <source src="{{ asset('/front/assets/videos/video1.mp4') }}"type="video/mp4">
 
                 La video n'est pas suporter par votre navigateur
@@ -99,6 +100,9 @@
     </section>
     <!-- ***** Main Banner Area End ***** -->
 
+    <div id="map"></div>
+
+
     <div class="visit-country">
         <div class="container">
             <div class="row">
@@ -128,7 +132,7 @@
                                             <div class="col-lg-8 col-sm-7">
                                                 <div class="right-content">
                                                     <h4>{{ $report->location }} </h4>
-                                                    <span>Region maritime </span>
+                                                    <span> Région {{ $report->region }}</span>
 
                                                     <p>{{ $report->description }}</p>
                                                     <ul class="info">
@@ -142,17 +146,21 @@
                                                                     commentaire</span>
                                                             @endif
                                                         </li>
-                                                        <li><i class="fa fa-globe"></i> Longitude</li>
-                                                        <li><i class="fa fa-globe"></i> Latitude </li>
+                                                        <li><i class="fa fa-globe"></i> Longitude :
+                                                            {{ $report->longitude }}</li>
+                                                        <li><i class="fa fa-globe"></i> Latitude : {{ $report->latitude }}
+                                                        </li>
                                                     </ul>
 
                                                     <div class="d-flex">
                                                         <div class="coments">
                                                             @foreach ($report->comments as $comment)
-                                                            <div class="comment-border">
-                                                                <p style="">{{ $comment->comment }} 
-                                                                    <b class="comment-name" > - par {{ $comment->name }}</b></p>
-                                                            </div>
+                                                                <div class="comment-border">
+                                                                    <p style="">{{ $comment->comment }}
+                                                                        <b class="comment-name"> - par
+                                                                            {{ $comment->name }}</b>
+                                                                    </p>
+                                                                </div>
                                                             @endforeach
                                                         </div>
                                                     </div>
@@ -208,4 +216,5 @@
 @endsection
 
 @section('script')
+
 @endsection

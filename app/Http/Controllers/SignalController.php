@@ -21,12 +21,18 @@ class SignalController extends Controller
         $validatedData = $request->validate([
             'location' => 'required',
             'description' => 'required',
+            'region' => 'nullable',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
         ]);
 
         // Créer un nouveau signalement
         $report = new Report;
         $report->location = $validatedData['location'];
         $report->description = $validatedData['description'];
+        $report->region = $validatedData['region'];
+        $report->latitude = $validatedData['latitude'];
+        $report->longitude = $validatedData['longitude'];
         $report->save();
 
         // Rediriger l'utilisateur avec un message de confirmation
@@ -39,24 +45,31 @@ class SignalController extends Controller
         $reports = Report::with('comments')->get();
         return view('front.pages.signal', ['reports' => $reports]);
     }
-
+    
     public function store_signalement(Request $request)
     {
         // Valider les données du formulaire
         $validatedData = $request->validate([
             'location' => 'required',
             'description' => 'required',
+            'region' => 'nullable',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
         ]);
-
+    
         // Créer un nouveau signalement
         $report = new Report;
         $report->location = $validatedData['location'];
         $report->description = $validatedData['description'];
+        $report->region = $validatedData['region'];
+        $report->latitude = $validatedData['latitude'];
+        $report->longitude = $validatedData['longitude'];
         $report->save();
-
+    
         // Rediriger l'utilisateur avec un message de confirmation
         return redirect()->route('acceuil')->with('success', 'Le signalement a été ajouté avec succès.');
     }
+    
 
     public function show_reportcomment($id)
     {

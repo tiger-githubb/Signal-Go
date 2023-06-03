@@ -822,21 +822,9 @@ Banner Style
   transition: 0.3s;
 }
 #section-1 .content-slider .slider #top-banner-1 {
-  background: url('/assets/videos/video1.mp4') no-repeat center center;
   background-size: cover;
 }
-#section-1 .content-slider .slider #top-banner-2 {
-  background: url('../images/banner-02.jpg') no-repeat center center;
-  background-size: cover;
-}
-#section-1 .content-slider .slider #top-banner-3 {
-  background: url('../images/banner-03.jpg') no-repeat center center;
-  background-size: cover;
-}
-#section-1 .content-slider .slider #top-banner-4 {
-  background: url('../images/banner-04.jpg') no-repeat center center;
-  background-size: cover;
-}
+
 #section-1 .content-slider nav {
   position: absolute;
   bottom: 30px;
@@ -2407,4 +2395,8 @@ b{
 
 .comment-name{
   padding-left: 20px !important;
+}
+
+#hero > div.heroText > p{
+  color: #e7e7e7;
 }

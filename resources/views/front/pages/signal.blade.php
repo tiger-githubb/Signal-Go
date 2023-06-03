@@ -74,7 +74,7 @@
           <h2>Faire une signalisation</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt uttersi labore et
             dolore magna aliqua is ipsum suspendisse ultrices gravida</p>
-          <div class="main-button"><a href="about.html">Voir les signalisations</a></div>
+          <div class="main-button"><a href="{{ route('acceuil') }}" >Voir les signalisations</a></div>
         </div>
       </div>
     </div>
@@ -107,9 +107,7 @@
       </div>
     </div>
   </div>
-
-
-
+ 
   <div class="reservation-form">
     <div class="container">
       <div class="row">
@@ -124,7 +122,7 @@
           </div>
         </div>
         <div class="col-lg-12">
-          <form id="reservation-form" name="gs" role="search"  method="POST" action="{{ route('reports.store') }}" >
+          <form id="reservation-form" name="gs" role="search" method="POST" action="{{ route('reports.store') }}">
             @csrf
             <div class="row">
               <div class="col-lg-12">
@@ -133,49 +131,58 @@
               <div class="col-lg-6">
                 <fieldset>
                   <label for="Name" class="form-label">Nom</label>
-                  <input type="text" name="Name" class="Name" placeholder="Ex. Aristide">
+                  <input type="text" name="name" class="form-control" placeholder="Ex. Aristide">
                 </fieldset>
               </div>
               <div class="col-lg-6">
                 <fieldset>
-                  <label for="emplacement" class="form-label">Emplacement</label>
-                  <input  placeholder="ex.lome" id="location" type="text"
-                  class="Number @error('location') is-invalid @enderror" name="location"
-                  value="{{ old('location') }}" required autocomplete="location" autofocus >
-                    
+                  <label for="location" class="form-label">Emplacement</label>
+                  <input placeholder="ex.lome" id="location" type="text" class="form-control @error('location') is-invalid @enderror"
+                    name="location" value="{{ old('location') }}" required autocomplete="location" autofocus>
                 </fieldset>
               </div>
               <div class="col-lg-6">
                 <fieldset>
-                  <label for="chooseGuests" class="form-label">Choisir la region </label>
-                  <select name="Guests" class="form-select" aria-label="Default select example" id="chooseGuests"
-                    onChange="this.form.click()">
-                    <option type="checkbox" name="option1" value="Maritime">La région Maritime</option>
+                  <label for="chooseRegion" class="form-label">Choisir la région</label>
+                  <select name="region" class="form-select" id="chooseRegion">
+                    <option value="Maritime">La région Maritime</option>
                     <option value="Plateaux">La région des Plateaux</option>
                     <option value="Centrale">La région Centrale</option>
                     <option value="Kara">La région de la Kara</option>
                     <option value="Savanes">La région des Savanes</option>
-
                   </select>
-                </fieldset> 
+                </fieldset>
+              </div>
+
+              
+
+              <div class="col-lg-6">
+                <fieldset>
+                  <label for="latitude" class="form-label">Latitude</label>
+                  <input type="text" name="latitude" class="form-control" placeholder="Ex. 6.131845">
+                </fieldset>
               </div>
               <div class="col-lg-6">
                 <fieldset>
-                  <label for="Number" class="form-label">le rue </label>
-                  <input type="date" name="date" class="date" >
+                  <label for="longitude" class="form-label">Longitude</label>
+                  <input type="text" name="longitude" class="form-control" placeholder="Ex. 1.222329">
                 </fieldset>
               </div>
               <div class="col-lg-12">
-                <textarea id="description" name="description" rows="4" cols="40" class="form-control @error('description') is-invalid @enderror"placeholder="    saisir votre description " required autocomplete="description">{{ old('description') }}</textarea>
-                  
+                <fieldset>
+                  <label for="description" class="form-label">Description</label>
+                  <textarea id="description" name="description" rows="4" class="form-control @error('description') is-invalid @enderror"
+                    placeholder="Saisir votre description" required autocomplete="description">{{ old('description') }}</textarea>
+                </fieldset>
               </div>
               <div class="col-lg-12">
                 <fieldset>
-                  <button  type="submit" class="main-button">poster votre signalisation</button>
+                  <button type="submit" class="main-button">Poster votre signalisation</button>
                 </fieldset>
               </div>
             </div>
           </form>
+          
         </div>
       </div>
     </div>
