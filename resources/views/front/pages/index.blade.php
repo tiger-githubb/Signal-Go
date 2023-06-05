@@ -5,22 +5,6 @@
 @endsection
 
 @section('header')
-@endsection
-
-@section('content')
-    <!-- ***** Preloader Start ***** -->
-    <div id="js-preloader" class="js-preloader">
-        <div class="preloader-inner">
-            <span class="dot"></span>
-            <div class="dots">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </div>
-    <!-- ***** Preloader End ***** -->
-
     <section class="hero" id="hero">
         <div class="heroText">
             <h1 class="text-white mt-5 mb-lg-4" data-aos="zoom-in" data-aos-delay="800">
@@ -35,72 +19,19 @@
 
         <div class="videoWrapper">
             <video autoplay="" loop="" muted="" class="custom-video"
-                poster="">
-                <source src="{{ asset('/front/assets/videos/video1.mp4') }}"type="video/mp4">
+                poster="{{asset('front/assets/images/about-content-bg.jpg')}}">
+                <source src=""type="video/mp4">
 
-                La video n'est pas suporter par votre navigateur
+                La video n'est pas suportté par votre navigateur
             </video>
         </div>
 
         <div class="overlay"></div>
     </section>
+@endsection
 
-    <!-- ***** Header Area Start ***** -->
-    <header class="header-area header-sticky">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <nav class="main-nav">
-                        <!-- ***** Logo Start ***** -->
-                        <a href="index.html" class="logo">
-                            <img src="{{ asset('/front/assets/images/logo.png') }}" alt="">
-                        </a>
-                        <!-- ***** Logo End ***** -->
-                        <!-- ***** Menu Start ***** -->
-                        <ul class="nav">
-                            <li><a href="{{ route('acceuil') }}" class="active">Acceuil</a></li>
-                            <li><a href="{{ route('aPropos') }}">A Propos</a></li>
-                            <li><a href="{{ route('signalement.show') }}">Signaler</a></li>
+@section('content')
 
-
-                            @if (Route::has('login'))
-                                @auth
-                                    <li class="nav-item">
-                                        <a class="" href="{{ route('dashboard') }}">Tableau de bord</a>
-                                    </li>
-                                @else
-                                    <li class="nav-item">
-                                        <a class="" href="{{ route('login') }}">Connexion</a>
-                                    </li>
-                                @endauth
-                            @endif
-
-                        </ul>
-                        <a class='menu-trigger'>
-                            <span>Menu</span>
-                        </a>
-                        <!-- ***** Menu End ***** -->
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- ***** Header Area End ***** -->
-
-    <!-- ***** Main Banner Area Start ***** -->
-    <section id="section-1">
-        <div class="content-slider">
-            <div class="slider">
-                <div id="top-banner-1" class="banner">
-                    <div class="banner-inner-wrapper header-text">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ***** Main Banner Area End ***** -->
-
-    <div id="map"></div>
 
 
     <div class="visit-country">
@@ -108,19 +39,19 @@
             <div class="row">
                 <div class="col-lg-5">
                     <div class="section-heading">
-                        <h2>Les signalisations recentes </h2>
+                        <h2>Les signalisations récentes </h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                             labore.</p>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-lg-12">
                     <div class="items">
 
                         <div class="row">
                             @foreach ($reports as $report)
-                                <div class="col-lg-12">
+                                <div class="col-lg-8">
                                     <div class="item">
                                         <div class="row">
                                             <div class="col-lg-4 col-sm-5">
@@ -135,7 +66,7 @@
                                                     <span> Région {{ $report->region }}</span>
 
                                                     <p>{{ $report->description }}</p>
-                                                    <ul class="info">
+                                                    <ul class="info d-flex">
                                                         <li>
                                                             @if ($report->comments->count() > 0)
                                                                 <span class="comment-count"><i class="fa fa-user"></i>
@@ -146,9 +77,9 @@
                                                                     commentaire</span>
                                                             @endif
                                                         </li>
-                                                        <li><i class="fa fa-globe"></i> Longitude :
+                                                        <li><i class="fa fa-globe"></i>La longitude :
                                                             {{ $report->longitude }}</li>
-                                                        <li><i class="fa fa-globe"></i> Latitude : {{ $report->latitude }}
+                                                        <li><i class="fa fa-globe"></i>La latitude : {{ $report->latitude }}
                                                         </li>
                                                     </ul>
 
@@ -174,6 +105,15 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-lg-4">
+                                    <div class="side-bar-map">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div id="map"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             @endforeach
 
 
@@ -191,20 +131,6 @@
 
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="side-bar-map">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div id="map">
-                                    <iframe
-                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126931.66525378477!2d1.1642883422946664!3d6.182315355755898!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1023e1c113185419%3A0x3224b5422caf411d!2zTG9tw6k!5e0!3m2!1sfr!2stg!4v1683653797511!5m2!1sfr!2stg"
-                                        width="100%" height="550px" frameborder="0"
-                                        style="border:0; border-radius: 23px; " allowfullscreen scrolling="yes"></iframe>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -212,9 +138,59 @@
 
 
 
-@section('footer')
+@section('cta')
+@include('front/inc/cta')
 @endsection
 
 @section('script')
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Initialisation de la carte
+        var map = L.map('map').setView([51.505, -0.09], 13);
 
+        // Ajouter une couche de tuiles (par exemple OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+
+        var customIcon = L.icon({
+            iconUrl: '/front/assets/images/feu.png',
+            iconSize: [30, 47], // Taille de l'icône en pixels
+            iconAnchor: [16, 32], // Point d'ancrage de l'icône
+        });
+
+        // Boucle sur les données de signalisation
+        @foreach ($reports as $report)
+            var latitude = {{ $report->latitude }};
+            var longitude = {{ $report->longitude }};
+
+           
+            // Créer un marqueur avec une icône personnalisée
+            var marker = L.marker([latitude, longitude], {
+                icon: customIcon
+            }).addTo(map);
+
+            marker.bindPopup("Localisation: {{ $report->location }}");
+        @endforeach
+        // Vérifier si la géolocalisation est prise en charge par le navigateur
+        if ("geolocation" in navigator) {
+            // Obtenir la position actuelle
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var lat = position.coords.latitude;
+                var lng = position.coords.longitude;
+
+                // Ajouter un marqueur pour la position actuelle
+                L.marker([lat, lng]).addTo(map)
+                    .bindPopup('Votre position actuelle')
+                    .openPopup();
+
+                // Centrer la carte sur la position actuelle
+                map.setView([lat, lng], 13);
+            });
+        } else {
+            console.log("La géolocalisation n'est pas prise en charge par ce navigateur.");
+        }
+    });
+</script>
 @endsection

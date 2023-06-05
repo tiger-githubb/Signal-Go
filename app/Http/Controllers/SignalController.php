@@ -45,6 +45,13 @@ class SignalController extends Controller
         $reports = Report::with('comments')->get();
         return view('front.pages.signal', ['reports' => $reports]);
     }
+
+    public function showcarte_signalement(Request $request)
+    {
+        // Afficher la carte des signalements
+        $reports = Report::with('comments')->get();
+        return view('front.pages.signalcarte', ['reports' => $reports]);
+    }
     
     public function store_signalement(Request $request)
     {

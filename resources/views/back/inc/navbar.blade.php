@@ -43,7 +43,7 @@
                     <span class="avatar avatar-sm" style="background-image: url({{ asset('back/dist/img/tiger.jpg') }})"></span>
                     <div class="d-none d-xl-block ps-2">
                         <div>{{ Auth::user()->name }}</div>
-                        <div class="mt-1 small text-muted">Publicateur</div>
+                        <div class="mt-1 small text-muted">Administrateur</div>
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">

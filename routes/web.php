@@ -30,6 +30,9 @@ Route::get('/', [SignalController  ::class, 'index'])->name('acceuil');
     Route::get('/signalement', [SignalController::class, 'show_signalement'])->name('signalement.show');
     Route::post('/signalement/enregistrer', [SignalController::class, 'store_signalement'])->name('signalement.store');
 
+    //affichage de la carte
+    Route::get('/signalements/map', [SignalController::class, 'showcarte_signalement'])->name('signalement.carteshow');
+
     // Route::get('tableau-de-bord/publications/{post}/modifier', [PostController::class, 'edit'])->name('article.edit');
     // Route::put('tableau-de-bord/publications/{post}/update', [PostController::class, 'update'])->name('article.update');
     // Route::get('tableau-de-bord/publications/{post}/supprimer', [PostController::class, 'destroy'])->name('article.destroy');

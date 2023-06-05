@@ -347,7 +347,7 @@ Header Style
 
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: 10000;
   -webkit-transition: all .5s ease 0s;
   -moz-transition: all .5s ease 0s;
   -o-transition: all .5s ease 0s;
@@ -2125,10 +2125,9 @@ Reservation Page Style
 }
 
 .reservation-form #reservation-form {
-  padding: 60px 120px;
+  padding: 60px 40px;
   background-color: #f9f9f9;
-  border-bottom-right-radius: 23px;
-  border-bottom-left-radius: 23px;
+  border-radius: 23px;
 }
 
 .reservation-form #reservation-form label {
@@ -2399,4 +2398,12 @@ b{
 
 #hero > div.heroText > p{
   color: #e7e7e7;
+}
+
+.leaflet-pane{
+  z-index: 1 !important;
+}
+
+.visit-country .item .right-content ul li{
+  text-align: end !important;
 }

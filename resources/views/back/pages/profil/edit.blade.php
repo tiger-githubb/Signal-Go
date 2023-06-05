@@ -56,7 +56,7 @@
                         <div class="row g-3">
                             <div class="col-md">
                                 <div class="form-label">Role</div>
-                                <input type="text" class="form-control" placeholder="Publicateur" disabled>
+                                <input type="text" class="form-control" placeholder="Administrateur" disabled>
                             </div>
 
                             <div class="col-md">
