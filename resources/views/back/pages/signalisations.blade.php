@@ -1,6 +1,7 @@
 @extends('back.layout')
 
-@section('pageTitle', isset($pageTitle) ? $pageTitle : 'Articles')
+@section('pageTitle', isset($pageTitle) ? $pageTitle : 'Signalisations')
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 @section('header')
     <!-- Page header -->
@@ -27,7 +28,7 @@
     <!-- Page body -->
     <div class="page-body">
         <div class="container-xl">
-            <div id="map"></div>
+            
             <div class="row row-cards">
 
                 @if (session('status'))
@@ -42,6 +43,7 @@
                 @endif
 
                 <div class="col-lg-12">
+                    <div id="map"></div>
                     <div class="card">
                         <div class="card-body" style=" padding-bottom: 45px;">
                             <div id="table-default" class="table-responsive">
@@ -56,7 +58,9 @@
                                                         data-sort="sort-category">Localisation</button></th>
                                                 <th><button class="table-sort" data-sort="sort-title">Description</button>
                                                 </th>
-                                                <th></th>
+                                                <th><button class="table-sort" data-sort="sort-title">Etat</button></th>
+                                            </th>
+                                                <th>Action</th>
                                             @else
                                                 <th></th>
                                             @endif
@@ -73,6 +77,17 @@
                                                         {{ $report->updated_at->format('d M Y') }}</td>
                                                     <td class="sort-category">{{ $report->location }}</td>
                                                     <td class="sort-title">{{ $report->description }}</td>
+                                                    <td>
+                                                        <div class="btn-list flex-nowrap">
+                                                            <select class="form-select" onchange="changeStatus(this.value, {{ $report->id }})">
+                                                                <option value="En_cours" {{ $report->status == 'En_cours' ? 'selected' : '' }}>En cours</option>
+                                                                <option value="Terminé" {{ $report->status == 'Terminé' ? 'selected' : '' }}>Terminé</option>
+                                                                <option value="En_attente" {{ $report->status == 'En_attente' ? 'selected' : '' }}>En attente</option>
+                                                            </select>
+                                                        </div>
+                                                    </td>
+                                                    
+
 
                                                     <td>
                                                         <div class="btn-list flex-nowrap">
@@ -129,7 +144,6 @@
 
         </div>
     </div>
-
 @endsection
 
 @section('modals')
@@ -159,7 +173,7 @@
                 var latitude = {{ $report->latitude }};
                 var longitude = {{ $report->longitude }};
 
-               
+
                 // Créer un marqueur avec une icône personnalisée
                 var marker = L.marker([latitude, longitude], {
                     icon: customIcon
@@ -187,6 +201,24 @@
             }
         });
     </script>
+
+<script>
+    
+function changeStatus(status, id) {
+    axios.put(`signalisations/{{ $report->id }}/update`, { status: status })
+        .then(response => {
+            // Mettre à jour l'affichage du statut dans le tableau
+            const statusCell = document.querySelector(`#status-${id}`);
+            statusCell.textContent = status;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+
+
+</script>
+
     <script src="/back/dist/libs/list.js/dist/list.min.js?1674944402" defer></script>
     <script src="/back/dist/libs/tinymce/tinymce.min.js?1674944402" defer></script>
 

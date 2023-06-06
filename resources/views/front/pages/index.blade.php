@@ -20,7 +20,7 @@
         <div class="videoWrapper">
             <video autoplay="" loop="" muted="" class="custom-video"
                 poster="{{asset('front/assets/images/about-content-bg.jpg')}}">
-                <source src=""type="video/mp4">
+                <source src="front/assets/images/video1.mp4"type="video/mp4">
 
                 La video n'est pas suportté par votre navigateur
             </video>

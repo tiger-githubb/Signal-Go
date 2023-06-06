@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('location');
             $table->string('description')->nullable();
             $table->string('region')->nullable();
-            $table->enum('status', ['pending', 'in_progress', 'fixed'])->default('pending');
+            $table->enum('status', ['En_attente', 'En_cours', 'Terminé'])->default('En_attente');
             $table->float('latitude', 10, 6)->nullable();
             $table->float('longitude', 10, 6)->nullable();
             $table->timestamps();

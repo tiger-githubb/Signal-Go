@@ -19,23 +19,23 @@ Route::any('/register', function () {
 
 
 
-Route::get('/', [SignalController  ::class, 'index'])->name('acceuil');
+Route::get('/', [SignalController::class, 'index'])->name('acceuil');
 
-    //Reports
-    Route::post('/', [SignalController::class, 'store'])->name('reports.store');
+//Reports
+Route::post('/', [SignalController::class, 'store'])->name('reports.store');
 
-    Route::get('/signalement/{id}/commenter', [SignalController::class, 'show_reportcomment'])->name('reportcomment.show');
-    Route::post('/signalement/{id}/enregistrer-commentaire', [SignalController::class, 'store_reportcommemt'])->name('reportcomment.store');
+Route::get('/signalement/{id}/commenter', [SignalController::class, 'show_reportcomment'])->name('reportcomment.show');
+Route::post('/signalement/{id}/enregistrer-commentaire', [SignalController::class, 'store_reportcommemt'])->name('reportcomment.store');
 
-    Route::get('/signalement', [SignalController::class, 'show_signalement'])->name('signalement.show');
-    Route::post('/signalement/enregistrer', [SignalController::class, 'store_signalement'])->name('signalement.store');
+Route::get('/signalement', [SignalController::class, 'show_signalement'])->name('signalement.show');
+Route::post('/signalement/enregistrer', [SignalController::class, 'store_signalement'])->name('signalement.store');
 
-    //affichage de la carte
-    Route::get('/signalements/map', [SignalController::class, 'showcarte_signalement'])->name('signalement.carteshow');
+//affichage de la carte
+Route::get('/signalements/map', [SignalController::class, 'showcarte_signalement'])->name('signalement.carteshow');
 
-    // Route::get('tableau-de-bord/publications/{post}/modifier', [PostController::class, 'edit'])->name('article.edit');
-    // Route::put('tableau-de-bord/publications/{post}/update', [PostController::class, 'update'])->name('article.update');
-    // Route::get('tableau-de-bord/publications/{post}/supprimer', [PostController::class, 'destroy'])->name('article.destroy');
+// Route::get('tableau-de-bord/publications/{post}/modifier', [PostController::class, 'edit'])->name('article.edit');
+// Route::put('tableau-de-bord/publications/{post}/update', [PostController::class, 'update'])->name('article.update');
+// Route::get('tableau-de-bord/publications/{post}/supprimer', [PostController::class, 'destroy'])->name('article.destroy');
 
 Route::get('blog', [PostController::class, 'index'])->name('blog');
 Route::get('blog/articles/{post}', [PostController::class, 'show'])->name('article.show');
@@ -47,6 +47,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('tableau-de-bord', [PagesController::class, 'dashboard'])->name('dashboard');
     Route::get('tableau-de-bord/publications', [PagesController::class, 'dashboard_publications'])->name('publications');
     Route::get('tableau-de-bord/signalisations', [PagesController::class, 'dashboard_signalisations'])->name('signalisations');
+
     //User account
     Route::get('tableau-de-bord/mon-compte', function () {
         return view('back.pages.profil.edit');
@@ -64,8 +65,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('tableau-de-bord/publications/{post}/supprimer', [PostController::class, 'destroy'])->name('article.destroy');
 
 
-        //signalisations
-        Route::get('tableau-de-bord/signalisations/{report}/supprimer', [PagesController::class, 'destroy'])->name('signalisation.destroy');
+    //signalisations
+    Route::get('tableau-de-bord/signalisations/{report}/supprimer', [SignalController::class, 'destroy'])->name('signalisation.destroy');
+    Route::put('tableau-de-bord/signalisations/{report}/update', [SignalController::class, 'update'])->name('signalisation.update');
+
+
     //Post categories
     Route::get('tableau-de-bord/categories/ajouter', [CategoryController::class, 'create'])->name('category.create');
     Route::post('tableau-de-bord/categories/enregistrer', [CategoryController::class, 'store'])->name('category.store');

@@ -46,13 +46,7 @@ class SignalController extends Controller
         return view('front.pages.signal', ['reports' => $reports]);
     }
 
-    public function showcarte_signalement(Request $request)
-    {
-        // Afficher la carte des signalements
-        $reports = Report::with('comments')->get();
-        return view('front.pages.signalcarte', ['reports' => $reports]);
-    }
-    
+
     public function store_signalement(Request $request)
     {
         // Valider les données du formulaire
@@ -63,7 +57,7 @@ class SignalController extends Controller
             'latitude' => 'nullable|numeric',
             'longitude' => 'nullable|numeric',
         ]);
-    
+
         // Créer un nouveau signalement
         $report = new Report;
         $report->location = $validatedData['location'];
@@ -72,11 +66,47 @@ class SignalController extends Controller
         $report->latitude = $validatedData['latitude'];
         $report->longitude = $validatedData['longitude'];
         $report->save();
-    
+
         // Rediriger l'utilisateur avec un message de confirmation
         return redirect()->route('acceuil')->with('success', 'Le signalement a été ajouté avec succès.');
     }
+
+
+    public function update(Request $request, Report $report)
+    {
+        $validatedData = $request->validate([
+            'status' => 'required|in:En_attente,En_cours,Terminé',
+        ]);
     
+        $report->status = $validatedData['status'];
+        $report->save();
+    
+        return redirect()->back()->with('success', 'Le statut du signalement a été mis à jour avec succès.');
+    }
+    
+    
+    public function destroy(Report $report)
+    {
+
+        try {
+
+            $report = Report::where('id', $report->id)->firstOrFail();
+
+            $report->delete();
+            return redirect()->route('signalisations')->with('status', 'La signalisation a été supprimé avec succès.');
+        } catch (\Exception $e) {
+
+            return back()->with('error', 'Une erreur s\'est produite. Veuillez réessayer.');
+        }
+    }
+
+
+    public function showcarte_signalement(Request $request)
+    {
+        // Afficher la carte des signalements
+        $reports = Report::with('comments')->get();
+        return view('front.pages.signalcarte', ['reports' => $reports]);
+    }
 
     public function show_reportcomment($id)
     {
@@ -96,18 +126,15 @@ class SignalController extends Controller
             'name' => 'required',
             'comment' => 'required',
         ]);
-    
+
         // Ajouter un nouveau commentaire
         $reportcomment = new ReportComment;
         $reportcomment->report_id = $validatedData['report_id'];
         $reportcomment->name = $validatedData['name'];
         $reportcomment->comment = $validatedData['comment'];
         $reportcomment->save();
-    
+
         // Rediriger l'utilisateur vers la page du signalement avec un message de confirmation
         return redirect()->route('acceuil')->with('success', 'Le commentaire a été ajouté avec succès.');
     }
-    
-    
-    
 }

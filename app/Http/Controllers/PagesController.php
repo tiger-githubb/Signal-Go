@@ -51,20 +51,7 @@ class PagesController extends Controller
         return view('back.pages.signalisations', compact('reports'));
     }
 
-    public function destroy(Report $report)
-    {
 
-        try {
-
-            $report = Report::where('id', $report->id)->firstOrFail();
-
-            $report->delete();
-            return redirect()->route('signalisations')->with('status', 'La signalisation a été supprimé avec succès.');
-        } catch (\Exception $e) {
-
-            return back()->with('error', 'Une erreur s\'est produite. Veuillez réessayer.');
-        }
-    }
 
     // Contact and support send
     public function contactSend(Request $request)
